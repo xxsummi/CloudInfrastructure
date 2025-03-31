@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Event{% endblock %}
+
+{% block content %}
+    <div class="text-center-3">
+        <h1>{{event_name}}</h1>
+        <h3>Description</h3>
+        <p>{{description}}</p>
+        <h3>Status</h3>
+        <p>{{status}}</p>
+        <h3>Date</h3>
+        <p>{{event_date}}</p>
+
+        <button class="btn btn-primary mx-1 text-decoration-none">
+            <a href="{% url 'todolist:update_event' id %}" class="text-light, text-decoration-none" >Edit Event</a>
+        </button>
+        <button class="btn btn-primary mx-1 text-decoration-none">
+            <a href="{% url 'todolist:delete_event' id %}" class="text-light, text-decoration-none" >Delete Event</a>
+        </button>
+        <button class="btn btn-primary mx-1 text-decoration-none">
+            <a href="{% url 'todolist:index' %}" class="text-light, text-decoration-none" >Back to Tasks</a>
+        </button>
+    </div>
+    
+{% endblock %}

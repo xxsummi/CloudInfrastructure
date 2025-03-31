@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Event {% endblock %}
+
+{% block content %}
+	{% if user.is_anonymous == False %}
+		<div class="container">
+			<div class="row">
+				<div class="col-6 offset-3">
+					<h1 class="text-center my-3">Update Event</h1>
+					{% if error == True %}
+						<p class="text-danger"> Event not found! </p>
+					{% endif %}
+
+					<form action="{% url 'todolist:update_event' event_id=event.id  %}" method="post">
+						{% csrf_token %}
+
+						<div class="mb-3">
+							<label for="event_name"> Event Name: </label>
+							<input type="text" name="event_name" class="form-control" value="{{event_name}}" max_length="50" required>
+						</div>
+
+						<div class="mb-3">
+							<label for="description"> Description: </label>
+							<input type="text" name="description" class="form-control" value="{{description}}" required>
+						</div>
+
+						<div class="mb-3">
+							<label for="status"> Status: </label>
+							<input type="text" name="status" class="form-control" value="{{status}}" max_length="50" required>
+						</div>
+
+						<div class="text-center-3">
+							<input type="submit" class="btn btn-success" value="Update Event">
+						</div>
+
+					</form>
+					
+				</div>
+				
+			</div>
+		</div>
+	{% else %}
+		<h1 class="text-center my-3">Your are not authorized to access this page</h1>
+		<p class="text-center"> Kindly login <a href="{% url 'todolist:login' %}">here</a></p>
+	{% endif %}
+{% endblock %}

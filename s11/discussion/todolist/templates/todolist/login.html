@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock%}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <h1 class="text-center my-3">Login</h1>
+                {% if error == True%}
+                    <p class="text-danger">Invalid User Credentials. Please check your username and password.</p>
+                {% endif %}
+                <form action="{% url 'todolist:login' %}" method="post">
+                    {%csrf_token%}
+                    <div class="mb-3">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="name" name="username" value="{{ username }}" maxlength="20" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password:</label>
+                        <input type="text" class="form-control" id="password" name="password" value="{{ password }}" maxlength="20" required>
+                    </div>
+                    <div class="text-center">
+                        <input class="btn btn-success" type="submit" value="login">
+                    </div>
+                </form>
+            </div>
+            <p class="text-center">Don't have an account? <a href="{% url 'todolist:register' %}">Sign up</a></p>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+<!-- {% if is_user_registred == False %}
+    <h1>Something went wrong</h1>
+    <p>Please contact your admin or reset your password</p>
+    <a href="{% url 'todolist:index' %}">Back to index page</a>
+{% endif%} -->
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'success' %}green{% else %}red{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+</body>
+</html>
+
+
+ -->

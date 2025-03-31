@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Update User{% endblock %}
+
+{% block content %}
+    {% if user.is_anonymous == False %}
+        <div class="container">
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <h1 class="text-center my-3">Update User</h1>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" name="first_name" class="form-control" value="{{ request.user.first_name }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" name="last_name" class="form-control" value="{{ request.user.last_name }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="current_password">Current Password:</label>
+                            <input type="password" name="current_password" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="new_password">New Password:</label>
+                            <input type="password" name="new_password" class="form-control">
+                        </div>
+
+                        <div class="text-center-3">
+                            <input type="submit" class="btn btn-success" value="Update User">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1 class="text-center my-3">You are not authorized to access this page</h1>
+        <p class="text-center">Kindly login <a href="{% url 'todolist:login' %}">here</a></p>
+    {% endif %}
+{% endblock %}
